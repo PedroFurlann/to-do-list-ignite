@@ -1,10 +1,15 @@
-import './App.css'
+import { Header } from './components/Header'
+import { Home } from './pages/home'
+import { GlobalStyle } from './styles/globalStyle'
 
 function App() {
   return (
-    <div>
-      <h1>ola</h1>
-    </div>
+    <>
+      <GlobalStyle />
+
+      <Header />
+      <Home />
+    </>
   )
 }
 
