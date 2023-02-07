@@ -2,30 +2,34 @@ import styled from 'styled-components'
 
 export const SearchFormContainer = styled.form`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
+  margin-top: -5rem;
 
-  input: {
+  input {
     flex: 1;
     border-radius: 8px;
-    border: 0;
-    background-color: #262626;
+    background-color: #333333;
     color: #fff;
+    height: 3.5rem;
     padding: 1rem;
+    font-size: 1rem;
 
-    &:hover
+    &::placeholder {
+      color: #808080;
+    }
   }
 
-  button: {
+  button {
     display: flex;
     align-items: center;
     gap: 0.75rem;
 
-    border: 0;
     padding: 1rem;
-    background: transparent;
+    background: blue;
     color: #f2f2f2;
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
+    background-color: #1e6f9f;
   }
 `
