@@ -46,7 +46,7 @@ export const SearchFormContainer = styled.form`
   }
 `
 
-export const EmptyTableContainer = styled.div`
+export const EmptyTaskContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,7 +65,7 @@ export const EmptyTableContainer = styled.div`
   }
 `
 
-export const HeaderTableContainer = styled.div`
+export const HeaderTaskContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 6rem;
@@ -89,25 +89,19 @@ export const TaskCreatedAndDone = styled.p<TaskProps>`
   color: ${(props) => (props.variant === 'created' ? '#4ea8de' : '#8284fa')};
 `
 
-export const TableContainer = styled.table`
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 0.5rem;
+export const TaskListContainer = styled.div`
   margin-top: 1.5rem;
+`
 
-  td {
-    padding: 1.25rem 2rem;
-    background: #333333;
-    margin-bottom: 10rem;
+export const TaskContainer = styled.div`
+  background-color: #333333;
+  flex: 1;
+  height: 4.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 
-    &:first-child {
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-    }
-
-    &:last-child {
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
-    }
+  p {
+    color: #f2f2f2;
+    font-size: 14;
   }
 `
