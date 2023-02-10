@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { PlusCircle } from 'phosphor-react'
+import { Check, CheckCircle, PlusCircle, Trash } from 'phosphor-react'
 import { ChangeEvent, FormEvent, useState } from 'react'
 // import { SearchForm } from '../components/SearchForm'
 import {
@@ -10,6 +10,8 @@ import {
   TaskListContainer,
   TaskCreatedAndDone,
   TaskContainer,
+  CheckboxRoot,
+  CheckboxIndicator,
 } from './styles'
 
 import Clipboard from '../../assets/Clipboard.svg'
@@ -20,10 +22,20 @@ export function Home() {
   const [taskDone, setTaskDone] = useState(0)
   const [newTaskContent, setNewTaskContent] = useState('')
 
-  function taskCounter() {
+  function taskCounterAddition() {
     setTaskCreatedCount((state) => {
       return state! + 1
     })
+  }
+
+  function taskCountSubtraction() {
+    if (taskCreatedCount === 1) {
+      setTaskCreatedCount(null)
+    } else {
+      setTaskCreatedCount((state) => {
+        return state! - 1
+      })
+    }
   }
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
@@ -37,7 +49,16 @@ export function Home() {
 
     setTasksCreated([...tasksCreated, newTaskContent])
     setNewTaskContent('')
-    taskCounter()
+    taskCounterAddition()
+  }
+
+  function handleDeleteTask(taskDeleted: string) {
+    const TasksWithoutDeletedOne = tasksCreated.filter((task) => {
+      return task !== taskDeleted
+    })
+
+    setTasksCreated(TasksWithoutDeletedOne)
+    taskCountSubtraction()
   }
 
   const isEmpty = newTaskContent.length === 0
@@ -62,11 +83,11 @@ export function Home() {
           <TaskCreatedAndDone variant="created">
             Tarefas Criadas
           </TaskCreatedAndDone>
-          <span>{taskCreatedCount}</span>
+          <span id="created">{taskCreatedCount}</span>
         </div>
         <div>
           <TaskCreatedAndDone variant="done">Concluídas</TaskCreatedAndDone>
-          <span>{taskDone}</span>
+          <span id="done">2 de 5</span>
         </div>
       </HeaderTaskContainer>
 
@@ -87,7 +108,18 @@ export function Home() {
             {tasksCreated.map((task) => {
               return (
                 <TaskContainer key={task}>
+                  <CheckboxRoot defaultChecked id="c1">
+                    <CheckboxIndicator>
+                      <CheckCircle />
+                    </CheckboxIndicator>
+                  </CheckboxRoot>
                   <p>{task}</p>
+                  <button
+                    title="Excluir Task"
+                    onClick={() => handleDeleteTask(task)}
+                  >
+                    <Trash color="#808080" size={18} />
+                  </button>
                 </TaskContainer>
               )
             })}

@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, textarea, button {
-    font: 400, 1rem, sans-serif;
+    font: 400, 1rem, 'Robot', sans-serif;
+    --webkit-font-smoothing: antialiased;
   }
 `

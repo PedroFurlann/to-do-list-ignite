@@ -1,3 +1,4 @@
+import * as Checkbox from '@radix-ui/react-checkbox'
 import styled from 'styled-components'
 
 export const HomeContainer = styled.main`
@@ -74,9 +75,32 @@ export const HeaderTaskContainer = styled.div`
   div {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
 
-    > span {
+    > span#created {
       font-weight: bold;
+      background-color: #333333;
+      border-radius: 9999px;
+      height: 1.4rem;
+      width: 27px;
+      font-size: 14px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    > span#done {
+      font-weight: bold;
+      background-color: #333333;
+      border-radius: 9999px;
+      height: 1.4rem;
+      width: 53px;
+      font-size: 14px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 `
@@ -100,8 +124,44 @@ export const TaskContainer = styled.div`
   border-radius: 8px;
   margin-bottom: 1rem;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   p {
     color: #f2f2f2;
     font-size: 14;
   }
+
+  button {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+`
+export const CheckboxRoot = styled(Checkbox.Root)`
+  all: unset;
+  background-color: blue;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 0;
+  border-radius: 100%;
+
+  &[data-state='checked'] {
+  }
+
+  &[data-state='unchecked'] {
+    color: blue;
+    border-color: blue;
+  }
+`
+
+export const CheckboxIndicator = styled(Checkbox.Indicator)`
+  color: blue;
 `
