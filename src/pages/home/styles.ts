@@ -123,19 +123,14 @@ export const TaskContainer = styled.div`
   height: 4.5rem;
   border-radius: 8px;
   margin-bottom: 1rem;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  p {
-    color: #f2f2f2;
-    font-size: 14;
-  }
+  word-wrap: break-word;
+  flex-wrap: wrap;
 
   button {
     margin-right: 1rem;
-    margin-bottom: 1rem;
     border: 0;
     background: transparent;
     cursor: pointer;
@@ -143,25 +138,44 @@ export const TaskContainer = styled.div`
 `
 export const CheckboxRoot = styled(Checkbox.Root)`
   all: unset;
-  background-color: blue;
-  width: 1rem;
-  height: 1rem;
+  background-color: #5e60ce;
+  width: 1.5rem;
+  height: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border: 0;
   border-radius: 100%;
+  box-shadow: 0 0 0 2px #4ea8de;
 
+  margin-left: 1rem;
   &[data-state='checked'] {
-  }
-
-  &[data-state='unchecked'] {
-    color: blue;
-    border-color: blue;
+    box-shadow: none;
   }
 `
 
 export const CheckboxIndicator = styled(Checkbox.Indicator)`
-  color: blue;
+  color: #fff;
+  background-color: #5e60ce;
+  border-radius: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  svg {
+    margin-top: 4px;
+    margin-left: 4px;
+  }
+`
+
+export const FlexContainer = styled.div`
+  display: flex;
+`
+
+export const LabelContainer = styled.label`
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+
+  &[data-state='checked'] {
+    text-decoration: line-through;
+  }
 `

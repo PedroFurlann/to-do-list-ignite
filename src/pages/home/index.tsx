@@ -12,9 +12,12 @@ import {
   TaskContainer,
   CheckboxRoot,
   CheckboxIndicator,
+  FlexContainer,
+  LabelContainer,
 } from './styles'
 
 import Clipboard from '../../assets/Clipboard.svg'
+import { CheckboxIcon, CheckIcon } from '@radix-ui/react-icons'
 
 export function Home() {
   const [tasksCreated, setTasksCreated] = useState<string[]>([])
@@ -86,8 +89,19 @@ export function Home() {
           <span id="created">{taskCreatedCount}</span>
         </div>
         <div>
-          <TaskCreatedAndDone variant="done">Concluídas</TaskCreatedAndDone>
-          <span id="done">2 de 5</span>
+          {taskCreatedCount === null ? (
+            <div>
+              <TaskCreatedAndDone variant="done">Concluídas</TaskCreatedAndDone>
+              <span id="done">{taskDone} de 0</span>
+            </div>
+          ) : (
+            <div>
+              <TaskCreatedAndDone variant="done">Concluídas</TaskCreatedAndDone>
+              <span id="done">
+                {taskDone} de {taskCreatedCount}
+              </span>
+            </div>
+          )}
         </div>
       </HeaderTaskContainer>
 
@@ -108,12 +122,16 @@ export function Home() {
             {tasksCreated.map((task) => {
               return (
                 <TaskContainer key={task}>
-                  <CheckboxRoot defaultChecked id="c1">
-                    <CheckboxIndicator>
-                      <CheckCircle />
-                    </CheckboxIndicator>
-                  </CheckboxRoot>
-                  <p>{task}</p>
+                  <FlexContainer style={{ alignItems: 'center' }}>
+                    <CheckboxRoot id="c1">
+                      <CheckboxIndicator id="c1">
+                        <Check />
+                      </CheckboxIndicator>
+                    </CheckboxRoot>
+                    <LabelContainer style={{ paddingLeft: 15 }} htmlFor="c1">
+                      {task}
+                    </LabelContainer>
+                  </FlexContainer>
                   <button
                     title="Excluir Task"
                     onClick={() => handleDeleteTask(task)}
