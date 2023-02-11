@@ -175,7 +175,7 @@ export const LabelContainer = styled.label`
   font-size: 15px;
   line-height: 1;
 
-  &[data-state='checked'] {
+  group-data-[state='checked'] {
     text-decoration: line-through;
   }
 `
