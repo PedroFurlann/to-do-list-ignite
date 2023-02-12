@@ -174,8 +174,4 @@ export const LabelContainer = styled.label`
   color: #fff;
   font-size: 15px;
   line-height: 1;
-
-  group-data-[state='checked'] {
-    text-decoration: line-through;
-  }
 `

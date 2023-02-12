@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Check, CheckCircle, PlusCircle, Trash } from 'phosphor-react'
+import { Check, PlusCircle, Trash } from 'phosphor-react'
 import { ChangeEvent, FormEvent, useState } from 'react'
 // import { SearchForm } from '../components/SearchForm'
 import {
@@ -17,9 +17,12 @@ import {
 } from './styles'
 
 import Clipboard from '../../assets/Clipboard.svg'
-import { CheckboxIcon, CheckIcon } from '@radix-ui/react-icons'
 
-export function Home() {
+interface TaskCompletedProps {
+  completed: boolean
+}
+
+export function Home({ completed }: TaskCompletedProps) {
   const [tasksCreated, setTasksCreated] = useState<string[]>([])
   const [taskCreatedCount, setTaskCreatedCount] = useState<number | null>(null)
   const [taskDone, setTaskDone] = useState(0)
@@ -123,13 +126,13 @@ export function Home() {
               return (
                 <TaskContainer key={task}>
                   <FlexContainer style={{ alignItems: 'center' }}>
-                    <CheckboxRoot id="c1">
+                    <CheckboxRoot id="c1" checked={completed}>
                       <CheckboxIndicator id="c1">
                         <Check />
                       </CheckboxIndicator>
                     </CheckboxRoot>
                     <LabelContainer style={{ paddingLeft: 15 }} htmlFor="c1">
-                      {task}
+                      <p data-checked={completed}>{task}</p>
                     </LabelContainer>
                   </FlexContainer>
                   <button
