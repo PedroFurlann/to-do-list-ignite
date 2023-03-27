@@ -15,26 +15,29 @@ import Clipboard from '../../assets/Clipboard.svg'
 import { TaskCard } from '../../components/TaskCard'
 
 interface TaskProps {
-  id: number
   text: string
   isCompleted: boolean
 }
 
 export function Home() {
-  const [tasksCreated, setTasksCreated] = useState<string[]>([])
+  const [tasksCreated, setTasksCreated] = useState<TaskProps[]>([])
   const [taskCreatedCount, setTaskCreatedCount] = useState<number | null>(null)
   const [taskDone, setTaskDone] = useState(0)
   const [newTaskContent, setNewTaskContent] = useState('')
-  const [taskDoneState, setTaskDoneState] = useState(false)
 
-  function handleToggletaskDoneState(task: string) {
-    if (taskDoneState === false) {
-      setTaskDoneState(true)
-      setTaskDone((state) => state + 1)
-    } else {
-      setTaskDoneState(false)
-      setTaskDone((state) => state - 1)
-    }
+  function handleToggleTaskDoneState(taskContent: string) {
+    // eslint-disable-next-line array-callback-return
+    tasksCreated.map((task) => {
+      if (task.text === taskContent) {
+        if (task.isCompleted === false) {
+          task.isCompleted = true
+          setTaskDone((state) => state + 1)
+        } else {
+          task.isCompleted = false
+          setTaskDone((state) => state - 1)
+        }
+      }
+    })
   }
 
   function taskCounterAddition() {
@@ -62,7 +65,12 @@ export function Home() {
   function handleCreateNewTask() {
     event?.preventDefault()
 
-    setTasksCreated((state) => [...state, newTaskContent])
+    const newTask = {
+      text: newTaskContent,
+      isCompleted: false,
+    }
+
+    setTasksCreated((state) => [...state, newTask])
 
     setNewTaskContent('')
 
@@ -70,9 +78,10 @@ export function Home() {
   }
 
   function handleRemoveTask(taskContent: string) {
-    setTasksCreated(tasksCreated.filter((task) => task !== taskContent))
+    setTasksCreated(tasksCreated.filter((task) => task.text !== taskContent))
 
     taskCountSubtraction()
+    setTaskDone((state) => state - 1)
   }
 
   const isEmpty = newTaskContent.length === 0
@@ -116,7 +125,7 @@ export function Home() {
         </div>
       </HeaderTaskContainer>
 
-      {taskCreatedCount === 0 ||
+      {tasksCreated.length <= 0 ||
         (taskCreatedCount === null ? (
           <div>
             <hr />
@@ -131,12 +140,12 @@ export function Home() {
         ) : (
           <TaskListContainer>
             {tasksCreated.map((task) => (
-              <TaskCard 
-                content={task}
-                isCompleted={taskDoneState}
-                key={task}
-                onRemoveTask={() => handleRemoveTask(task)}
-                onToggleIsCompleted={}
+              <TaskCard
+                content={task.text}
+                isCompleted={task.isCompleted}
+                key={task.text}
+                onRemoveTask={() => handleRemoveTask(task.text)}
+                onToggleIsCompleted={() => handleToggleTaskDoneState(task.text)}
               />
             ))}
           </TaskListContainer>

@@ -16,23 +16,27 @@ export function TaskCard({
   onToggleIsCompleted,
   isCompleted = false,
 }: TaskCardProps) {
-  return () => {
-    isCompleted === false ? (
-      <TaskContainer>
-        <Circle />
-        <p>{content}</p>
-        <button onClick={() => onRemoveTask(content)}>
-          <Trash />
-        </button>
-      </TaskContainer>
-    ) : (
-      <TaskContainer>
-        <CheckCircle />
-        <p>{content}</p>
-        <button onClick={() => onRemoveTask(content)}>
-          <Trash />
-        </button>
-      </TaskContainer>
-    )
-  }
+  return isCompleted === false ? (
+    <TaskContainer>
+      <button onClick={() => onToggleIsCompleted(content)}>
+        <Circle size={24} />
+      </button>
+      <p>{content}</p>
+      <button onClick={() => onRemoveTask(content)}>
+        <Trash />
+      </button>
+    </TaskContainer>
+  ) : (
+    <TaskContainer>
+      <button onClick={() => onToggleIsCompleted(content)}>
+        <CheckCircle size={24} />
+      </button>
+      <p style={{ textDecoration: 'line-through', color: '#808080' }}>
+        {content}
+      </p>
+      <button onClick={() => onRemoveTask(content)}>
+        <Trash />
+      </button>
+    </TaskContainer>
+  )
 }
