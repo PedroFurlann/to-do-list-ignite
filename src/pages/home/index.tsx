@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Check, PlusCircle, Trash } from 'phosphor-react'
+import { PlusCircle, Trash } from 'phosphor-react'
 import { ChangeEvent, FormEvent, useState } from 'react'
 // import { SearchForm } from '../components/SearchForm'
 import {
@@ -9,24 +9,33 @@ import {
   SearchFormContainer,
   TaskListContainer,
   TaskCreatedAndDone,
-  TaskContainer,
-  CheckboxRoot,
-  CheckboxIndicator,
-  FlexContainer,
-  LabelContainer,
 } from './styles'
 
 import Clipboard from '../../assets/Clipboard.svg'
+import { TaskCard } from '../../components/TaskCard'
 
-interface TaskCompletedProps {
-  completed: boolean
+interface TaskProps {
+  id: number
+  text: string
+  isCompleted: boolean
 }
 
-export function Home({ completed }: TaskCompletedProps) {
+export function Home() {
   const [tasksCreated, setTasksCreated] = useState<string[]>([])
   const [taskCreatedCount, setTaskCreatedCount] = useState<number | null>(null)
   const [taskDone, setTaskDone] = useState(0)
   const [newTaskContent, setNewTaskContent] = useState('')
+  const [taskDoneState, setTaskDoneState] = useState(false)
+
+  function handleToggletaskDoneState(task: string) {
+    if (taskDoneState === false) {
+      setTaskDoneState(true)
+      setTaskDone((state) => state + 1)
+    } else {
+      setTaskDoneState(false)
+      setTaskDone((state) => state - 1)
+    }
+  }
 
   function taskCounterAddition() {
     setTaskCreatedCount((state) => {
@@ -50,20 +59,19 @@ export function Home({ completed }: TaskCompletedProps) {
     event.target.setCustomValidity('')
   }
 
-  function handleCreateNewTask(event: FormEvent) {
-    event.preventDefault()
+  function handleCreateNewTask() {
+    event?.preventDefault()
 
-    setTasksCreated([...tasksCreated, newTaskContent])
+    setTasksCreated((state) => [...state, newTaskContent])
+
     setNewTaskContent('')
+
     taskCounterAddition()
   }
 
-  function handleDeleteTask(taskDeleted: string) {
-    const TasksWithoutDeletedOne = tasksCreated.filter((task) => {
-      return task !== taskDeleted
-    })
+  function handleRemoveTask(taskContent: string) {
+    setTasksCreated(tasksCreated.filter((task) => task !== taskContent))
 
-    setTasksCreated(TasksWithoutDeletedOne)
     taskCountSubtraction()
   }
 
@@ -122,28 +130,15 @@ export function Home({ completed }: TaskCompletedProps) {
           </div>
         ) : (
           <TaskListContainer>
-            {tasksCreated.map((task) => {
-              return (
-                <TaskContainer key={task}>
-                  <FlexContainer style={{ alignItems: 'center' }}>
-                    <CheckboxRoot id="c1" checked={completed}>
-                      <CheckboxIndicator id="c1">
-                        <Check />
-                      </CheckboxIndicator>
-                    </CheckboxRoot>
-                    <LabelContainer style={{ paddingLeft: 15 }} htmlFor="c1">
-                      <p data-checked={completed}>{task}</p>
-                    </LabelContainer>
-                  </FlexContainer>
-                  <button
-                    title="Excluir Task"
-                    onClick={() => handleDeleteTask(task)}
-                  >
-                    <Trash color="#808080" size={18} />
-                  </button>
-                </TaskContainer>
-              )
-            })}
+            {tasksCreated.map((task) => (
+              <TaskCard 
+                content={task}
+                isCompleted={taskDoneState}
+                key={task}
+                onRemoveTask={() => handleRemoveTask(task)}
+                onToggleIsCompleted={}
+              />
+            ))}
           </TaskListContainer>
         ))}
     </HomeContainer>
