@@ -81,7 +81,12 @@ export function Home() {
     setTasksCreated(tasksCreated.filter((task) => task.text !== taskContent))
 
     taskCountSubtraction()
-    setTaskDone((state) => state - 1)
+
+    const taskCompleted = tasksCreated.find((task) => task.text === taskContent)
+
+    if (taskCompleted?.isCompleted) {
+      setTaskDone((state) => state - 1)
+    }
   }
 
   const isEmpty = newTaskContent.length === 0
