@@ -1,4 +1,4 @@
-import { Check, CheckCircle, Circle, Trash } from 'phosphor-react'
+import { Check, Circle, Trash } from 'phosphor-react'
 import { TaskContainer } from './styles'
 
 interface TaskCardProps {
