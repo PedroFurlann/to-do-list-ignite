@@ -1,5 +1,4 @@
-# Teste front end - Front-Blog :man_technologist:
-## Desafio 1 - Trilha React Ignite / To-do-list :bookmark_tabs:
+# Desafio 1 - Trilha React Ignite / To-do-list :bookmark_tabs:
 
 ### Tecnologias Usadas :computer:
 
