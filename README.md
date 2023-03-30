@@ -7,8 +7,6 @@
 - #### Styled-Components
 - #### Vite
 
-
-
 ### Como Iniciar a aplicação na sua máquina :arrow_down:
 
 ```bash
@@ -31,6 +29,3 @@ $ npm run dev
 
   <img src="https://raw.githubusercontent.com/PedroFurlann/to-do-list-ignite/main/src/assets/todo3.png" />
   <img src="https://raw.githubusercontent.com/PedroFurlann/to-do-list-ignite/main/src/assets/todo2.png" />
-
-
-
